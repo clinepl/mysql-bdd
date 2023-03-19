@@ -1,0 +1,46 @@
+CREATE TABLE fournisseurs (
+  id INT NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(255) NOT NULL,
+  produits VARCHAR(255) NOT NULL,
+  telephone VARCHAR(20),
+  adresse_postale VARCHAR(255),
+  adresse_mail VARCHAR(255),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE cafes_arabica (
+  id INT NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(255) NOT NULL,
+  fournisseur_id INT NOT NULL,
+  prix DECIMAL(10,2) NOT NULL,
+  pays_origine VARCHAR(255),
+  PRIMARY KEY (id),
+  FOREIGN KEY (fournisseur_id) REFERENCES fournisseurs(id)
+);
+
+CREATE TABLE cafes_robusta (
+  id INT NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(255) NOT NULL,
+  fournisseur_id INT NOT NULL,
+  prix DECIMAL(10,2) NOT NULL,
+  pays_origine VARCHAR(255),
+  PRIMARY KEY (id),
+  FOREIGN KEY (fournisseur_id) REFERENCES fournisseurs(id)
+);
+
+INSERT INTO fournisseurs (nom, produits, telephone, adresse_postale, adresse_mail)
+VALUES ('Fournisseur De Jean', 'Cafés arabica ', '01.23.45.67.89', '12 Rue du Café, 75001 Paris', 'fournisseur-de-jean@cafe.com',1),
+       ('Fournisseur Bon matin', 'Cafés arabica', '01.23.45.67.90', '14 Rue du Café, 75002 Paris', 'fournisseur-bon-matin@cafe.com',2),
+       ('Fournisseur Dubois', 'Cafés robusta', '01.23.45.67.91', '16 Rue du Café, 75003 Paris', 'fournisseur-dubois@cafe.com',3),
+       ('Fournisseur Domero', 'Cafés robusta', '01.23.45.67.92', '18 Rue du Café, 75004 Paris', 'fournisseur-Domero@cafe.com', 4);
+
+INSERT INTO cafes_arabica (nom, fournisseur_id, prix, pays_origine)
+VALUES ('Café Arabica Bourbon', 1, 9.99, 'Yemen'),
+       ('Café Arabica Typica', 2, 8.99, 'Ethiopie'),
+       ('Café Arabica Pacas', 3, 10.99, 'Salvador'),
+       ('Café Arabica Caturra', 4, 12.99, 'Brésil'),
+       ('Café Arabica Geisha', 4, 11.99, 'Ethiopie');
+
+INSERT INTO cafes_robusta (nom, fournisseur_id, prix, pays_origine)
+VALUES ('Café Luwak', 3, 5.99, 'Indonésie'),
+       ('Café Alamid', 4, 4.99, 'Philippines');
