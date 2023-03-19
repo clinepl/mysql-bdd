@@ -1,0 +1,36 @@
+CREATE DATABASE epicerie;
+USE epicerie;
+
+CREATE TABLE fournisseurs (
+  id INT NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(255) NOT NULL,
+  telephone VARCHAR(20),
+  mail VARCHAR(255),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE legumes (
+  id INT NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(255) NOT NULL,
+  calories INT,
+  prix DECIMAL(10,2),
+  fournisseur_id INT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (fournisseur_id) REFERENCES fournisseurs(id)
+);
+
+CREATE TABLE fruits (
+  id INT NOT NULL AUTO_INCREMENT,
+  nom VARCHAR(255) NOT NULL,
+  calories INT,
+  prix DECIMAL(10,2),
+  fournisseur_id INT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (fournisseur_id) REFERENCES fournisseurs(id)
+);
+
+SELECT * FROM legumes 
+INNER JOIN fournisseurs ON legumes.fournisseur_id = fournisseurs.id;
+
+SELECT * FROM fruits 
+INNER JOIN fournisseurs ON fruits.fournisseur_id = fournisseurs.id;
